@@ -93,9 +93,134 @@ export default function App() {
       }, 10000);
     }
   return (
-    <View >
-      
-    </View>
+      <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+ 
+        <View>
+ 
+ 
+        <Text style={styles.titulo}>
+          ESP32-Cam (BLE)
+        </Text>
+ 
+        <touchableOpacity
+          onPress={connectToRobot}
+          style={styles.connectBtn}
+       > </touchableOpacity>
+ 
+        style={styles.connectBtn}
+ 
+       <Text style={styles.connectBtnText}>
+        {
+          connectionStatus === 'conectado' ? 'Conectado!':
+          connectionStatus === ' procurando' ? 'Procurando':
+          'Desconectado'
+ 
+        }
+ 
+        </Text>
+        </View>
+        <View style={styles.Constrols}>
+          <View style={styles.row}>
+            <ControlButton
+              label="⬆"
+              dirCode="F"
+              dirLabel="foward"
+              activeDir={activeDir}
+              onPress={startCommand}
+              onRelease={stopCommand}
+            />
+            <ControlButton
+              label="⬅"
+              dirCode="L"
+              dirLabel="left"
+              activeDir={activeDir}
+              onPress={startCommand}
+              onRelease={stopCommand}
+            />
+
+            <TouchableOpacity style={[styles.dpadBtn, style.stopBtn]}
+            onPress={stopCommand}>
+              <Text style={styles.dpadBtnText}>🟪</Text>
+              </TouchableOpacity>
+
+              <ControlButton
+              label="➡️"
+              dirCode="R"
+              dirLabel="right"
+              activeDir={activeDir}
+              onPress={startCommand}
+              onRelease={stopCommand}
+            />
+            </View>
+             <View style={styles.row}>
+            <ControlButton
+              label="⬇"
+              dirCode="F"
+              dirLabel="foward"
+              activeDir={activeDir}
+              onPress={startCommand}
+              onRelease={stopCommand}
+            />
+            </View>
+        </View>
+       
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
+ 
+function ControlButton (
+  {
+    label,
+    dirCode,
+    dirLabel,
+    activeDir,
+    onPress,
+    onRelease
+  }
+); {
+    const isActive = activeDir === dirLabel;
+ 
+}
+return (
+  <TouchableOpacity style=[(style.dpadBtn, isActive && style.dpadBtnActive)] 
+  onPressIn={() => onPress(dirCode, dirLabel)}
+  onPressOut={onRelease}
+  activeOpacity={0.7}
+  >
+
+    </TouchableOpacity>
+)
+ const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#fff6f2' },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  title: { fontSize: 18, fontWeight: 'bold', color: '#622019' },
+  connectBtn: { padding: 8, backgroundColor: '#eee', borderRadius: 8 },
+  connectBtnText: { fontSize: 13, color: '#333' },
+  warningBanner: { backgroundColor: '#fff3cd', padding: 8, marginHorizontal: 16, borderRadius: 8 },
+  warningText: { color: '#7a5c00', fontSize: 12, textAlign: 'center' },
+  speedContainer: { paddingHorizontal: 24, marginTop: 20 },
+  speedLabel: { fontSize: 14, color: '#333', marginBottom: 4 },
+  controls: { flex: 1, justifyContent: 'center', alignItems: 'center', gap: 12 },
+  row: { flexDirection: 'row', gap: 12, marginVertical: 6 },
+  dpadBtn: {
+    width: 70,
+    height: 70,
+    borderRadius: 12,
+    backgroundColor: '#622019',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dpadBtnActive: { backgroundColor: '#BA9C72' },
+  stopBtn: { backgroundColor: '#a00' },
+  dpadBtnText: { fontSize: 28, color: '#fff', fontWeight: 'bold' },
+});
+ 
 
