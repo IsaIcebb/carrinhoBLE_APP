@@ -20,10 +20,19 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.isamoretti.snack70d1429ef4ce4e5e886fff075bb07938"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7c8573bb-b5e5-49ce-b133-364a878d68bb"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
